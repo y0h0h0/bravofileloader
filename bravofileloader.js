@@ -37,7 +37,9 @@
       runcb(callbacks.start);
     }
 
-    var elem = document.querySelector(selector);
+    var elem;
+    if(typeof selector==='string') elem = document.querySelector(selector);
+    else elem = selector;
     if (elem === null) return;
 
     elem.addEventListener('click', function(event) {
