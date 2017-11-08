@@ -1,8 +1,8 @@
 ;(function() {
   window.bravofileloader = function(selector, settings, callbacks) {
-    var selector = selector || '';
-    var settings = settings || {};
-    var callbacks = callbacks || {};
+    selector = selector || '';
+    settings = settings || {};
+    callbacks = callbacks || {};
 
     function runcb(cb, d1, d2) {
       if (typeof cb === 'function') cb(d1, d2)
@@ -16,7 +16,7 @@
 
       var xhr = new XMLHttpRequest();
       xhr.onload = xhr.onerror = function() {
-        if (this.status == 200) {
+        if (this.status === 200) {
           runcb(callbacks.done, xhr.response);
         } else {
           runcb(callbacks.error, this.status);
@@ -30,7 +30,7 @@
 
       var fd = new FormData();
       fd.append(settings.name || 'file', file);
-      for (k in settings.data) fd.append(k, settings.data[k]);
+      for (var k in settings.data) fd.append(k, settings.data[k]);
 
       xhr.open("POST", settings.path || '', true);
       xhr.send(fd);
